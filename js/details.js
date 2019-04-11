@@ -24,7 +24,7 @@ class Details{
 		for(var i= 0;i<this.res.length;i++){
 			if(this.res[i].productId == $.cookie("goods")){
 //				console.log(this.res[i].productId)
-				str +=`<div class="main-t">
+				str +=`<div class="main-t" index="${this.res[i].productId}">
                                 <div class="main-t-t">
                                     <a href="index.html">首页</a>
                                     <span>&gt;&nbsp;&gt;</span>
@@ -96,7 +96,7 @@ class Details{
                                             
                                         </div>
                                         <div class="main-t-b-r-b" data-id="${this.res[i].productId}">
-                                            <a href="#"><img src="../images/car2.png" alt=""/>加入购物车</a>
+                                            <a href="car.html" class ="addcar"><img src="../images/car2.png" alt=""/>加入购物车</a>
                                             <a href="#">加关注</a>
                                         </div>
                                     </div>
@@ -157,8 +157,11 @@ class Details{
 		}
 //		console.log(str)
 		$("#main").html(str);
-		this.tab()
+		this.tab();
 		this.Magnifier();
+		
+//		存cookie加入购物车
+		this.addgoods();
 	}
 //	tab切换
 	tab(){
@@ -219,6 +222,47 @@ class Details{
 			this.op.style.display="none";
 			this.bbox.style.display="none";
 		}	
+		addgoods(){
+			var that = this;
+			$(".main-t-b-r-b").children(".addcar").on("click",function(){
+				this.id = $(".main-t").attr("index");
+				that.setCookies();
+			})
+		}
+		setCookies(){
+//			console.log(1);
+			this.id = $(".main-t").attr("index");
+//			console.log(this.id);
+////				因为要使用一条cookie存商品,所以数据选择数组里面放对象[{},{}]
+////				情况1:第一次添加
+				if($.cookie("goods1") == null){
+					this.goods = [{
+						id:this.id,
+						num:1
+					}];
+				}
+				else{
+//					情况2:不是第一次添加
+					this.goods = JSON.parse($.cookie("goods1"));
+//					新情况1：这次点击的是老数据
+					var onoff = true;
+					this.goods.forEach((v)=>{
+						if(v.id == this.id){
+							v.num++
+							onoff = false;
+						}
+					})
+//					新情况2：这次点击的是新数据
+					if(onoff){
+						this.goods.push({
+							id:this.id,
+							num:1
+						})
+					}
+				}
+//				所有关于数组的操作结束之后,将数组转成字符再设置到cookie中
+				$.cookie("goods1",JSON.stringify(this.goods))
+		}
 }
 
 

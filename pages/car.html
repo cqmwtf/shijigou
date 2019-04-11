@@ -7,11 +7,138 @@
 		<link rel="stylesheet" type="text/css" href="../css/car.css"/>
 	</head>
 	<body>
-		<header class="margin">
-			<div class="logo">
-				<img src="../images/logo.png"/>
-				<h3>购物车</h3>
+		<header>
+			<div class="margin">
+				<div class="logo">
+					<img src="../images/logo.png"/>
+					<h3>购物车</h3>
+					<h3><a href="index.html">首页</a></h3>
+					<h3><a href="list.html">商品列表</a></h3>
+				</div>
+				<div class="imag">
+					<img src="http://www.sjgo365.com/content/themes/shopping/img/du_cart.png"/>
+				</div>
 			</div>
 		</header>
+		<div id="shoppingcar" class="margin">
+			<table border="1" cellspacing="0" width="1000" align="center">
+				<thead>
+					<tr>
+					<th></th>
+					<th width="100">商品图片</th>
+					<th>名字</th>
+					<th>价格</th>
+					<th width="120">数量</th>
+					<th>操作</th>
+				</tr>
+				</thead>
+				<tbody id="tbody">
+				<!--<tr>
+					<td><input type="checkbox" name="" id="" value="" /></td>
+					<td><img src="../../project/dist/static/logo.png"/></td>
+					<td>名字</td>
+					<td>价格</td>
+					<td>1</td>
+					<td><em data-index="">删除</em></td>
+				</tr>-->
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="2"><input type="checkbox" name="" id="" value="" />全部选中</td>
+					<td align="right">总价：</td>
+					<td>0</td>
+					<td>总数量：0</td>
+					<td><em>结算</em></td>
+				</tr>
+			</tfoot>
+			</table>
+		</div>
+
+
+		<div id="side" class="margin">
+			<dl>
+				<dt>
+					<em><img src="../images/xinshou.png"/></em>
+					<strong>新手指南</strong>
+				</dt>
+				<dd>
+                    <ul>
+                        <li><em></em><a href="#" target="_blank">购物流程</a></li>
+                        <li><em></em><a href="#" target="_blank">常见问题</a></li>
+                        <li><em></em><a href="#" target="_blank">联系客服</a></li>
+						<li><em></em><a href="#" target="_blank">商品税率</a></li>
+                        <li><em></em><a href="#" target="_blank">关于世纪购</a></li>
+                    </ul>
+               </dd>
+			</dl>
+			<dl>
+                <dt>
+                	<em><img src="../images/peisong.png"/></em>
+                	<strong>配送方式</strong>
+                </dt>
+                <dd>
+                    <ul>
+                        <li><em></em><a href="#" target="_blank">配送范围及时间</a></li>
+                        <li><em></em><a href="#" target="_blank">配送服务查询</a></li>
+                        <li><em></em><a href="#" target="_blank">配送费收取标准</a></li>
+                        <li><em></em><a href="#" target="_blank">商品签收</a></li>
+                        <li><em></em><a href="#" target="_blank">配送问题</a></li>
+                    </ul>
+                </dd>
+            </dl>
+            <dl>
+                <dt>
+                	<em><img src="../images/zhifu.png"/></em>
+                	<strong>支付方式</strong></dt>
+                <dd>
+                    <ul>
+                        <li><em></em><a href="/Help/Index/10" target="_blank">网上支付</a></li>
+						<li><em></em><a href="/Help/Index/23" target="_blank">退款说明</a></li>
+                    </ul>
+                </dd>
+            </dl>
+            <dl>
+                <dt>
+                	<em><img src="../images/shouhou.png"/></em>
+                	<strong>售后服务</strong></dt>
+                <dd>
+                    <ul>
+						<li><em></em><a href="/Help/Index/24" target="_blank">投诉处理时限</a></li>
+						<li><em></em><a href="/Help/Index/25" target="_blank">违规订单处理规则</a></li>
+                        <li><em></em><a href="/Help/Index/12" target="_blank">返修/退换货</a></li>
+                        <li><em></em><a href="/Help/Index/14" target="_blank">取消订单</a></li>
+                    </ul>
+                </dd>
+            </dl>
+            <dl>
+                <dt><em><img src="../images/huiyuan.png"/></em>
+                	<strong>会员特权</strong></dt>
+                <dd>
+                    <ul>
+                        <li><em></em><a href="/lhy" target="_blank">VIP俱乐部</a></li>
+						<li><em></em><a href="/xr" target="_blank">试用中心</a></li>
+						<li><em></em><a href="/xys" target="_blank">签到中心</a></li>
+						<li><em></em><a href="/xh" target="_blank">晒单领劵</a></li>
+                    </ul>
+                </dd>
+            </dl>
+		</div>
+		
+		<!--footer-->
+		<footer class="margin a4">
+			<div class="icp">
+                <p>渝ICP备案号12000424号-1</p>
+		<p>Copyright© 重庆商社电子商务有限公司 sjgo365.com 保留一切权利。客服热线：4000993601</p>		
+            </div>
+            <div class="imgs">
+            	<img src="../images/anquan.jpg"/>
+            	<img src="../images/kexin.jpg"/>
+            	<img src="../images/chongqing.jpg"/>
+            	<img src="../images/renzheng.jpg"/>
+            </div>
+		</footer>
 	</body>
+	<script src="../js/libs/jquery.2.2.4.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/libs/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/car.js" type="text/javascript" charset="utf-8"></script>
 </html>

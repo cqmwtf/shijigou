@@ -1,9 +1,13 @@
 class car{
 	constructor(){
-		this.tbody = document.querySelector("#tbody")
+		this.tbody = document.querySelector("#tbody");
+		this.totalPrice=document.querySelector("#totalPrice"),
+		this.totalNum=document.querySelector("#totalNum"),
+		this.selectAll=document.querySelector("#selectAll")
+		this.totalPriceV = 0
+		this.totalNumV = 0;
 		this.load();
-		this.addEvent();
-		this.choose();
+		
 	}
 	load(){
 		var that = this;
@@ -33,47 +37,46 @@ class car{
 				if(this.res[i].productId == this.goods[j].id){
 //					console.log(1)
 					str += `
-					<tr>
-					<td><input type="checkbox" name="" id="" value=""  /></td>
+					<tr index = ${this.res[j].productId}>
+					<td><input type="checkbox" name="" id="checkbox" value=""  /></td>
 					<td><img src="${this.res[i].smallImage}"/></td>
 					<td>名字${this.res[i].productName}</td>
 					<td>${this.res[i].vipshopPrice}</td>
-					<td><input class="in" type="number" value="${this.goods[j].num}"></td>
+					<td><input class="in" type="number" value="${this.goods[j].num}" id = "num"></td>
 										<td><em data-index="${this.res[i].productId}">删除</em></td>
 					</tr>`;
 				}
 			}
 		}
-//		console.log(str)
 		$("#tbody").html(str);
+		this.addEvent();
 	}
 		addEvent(){
 				var that = this;
-
 				this.tbody.addEventListener("click",function(eve){
 					if(eve.target.nodeName == "EM"){
-//						找到点击商品的货号
 						that.id = eve.target.getAttribute("data-index");
-//						删除DOM元素
 						eve.target.parentNode.parentNode.remove();
-//						6.遍历cookie,找到符合条件的数据,做删除
 						that.changeCookie(function(index){
-//							8.删除并再次设置回去
 							that.goods.splice(index,1);
 						})
 					}
 				})
 				this.tbody.addEventListener("input",function(eve){
 					if(eve.target.type == "number"){
-//						10.先获取修改之后的数量,再获取当前商品的id
 						that.value = eve.target.value;
 						that.id = eve.target.parentNode.nextElementSibling.children[0].getAttribute("data-index");
-//						11.遍历cookie,找到符合条件的数据,做修改
+//						if($("tbody tr td #num").checked == true){
+//							that.totalNumV += 1;
+//						that.totalPriceV+=target.parentNode.parentNode.children[3].innerHTML;
+//						}
 						that.changeCookie(function(index){
 							that.goods[index].num = that.value;
 						});
+						console.log(1)
 					}
 				})
+				this.choose();
 			}
 			changeCookie(callback){
 				for(var i=0;i<this.goods.length;i++){
@@ -88,7 +91,49 @@ class car{
 				$.cookie("goods1",JSON.stringify(this.goods));
 			}
 		choose(){
-			this.tbody.addEventListener("input",function(){})
+			var that= this;
+			this.tbody.addEventListener("change",function(eve){
+				console.log()
+				var e = eve || window.event;
+				var target = e.target || e.srcElement;
+				if(target.id == "checkbox"){
+					if(target.checked == true){
+						console.log(target.parentNode.parentNode.children[4].children[0].value);
+						that.totalNumV += parseInt(target.parentNode.parentNode.children[4].children[0].value);
+						that.totalPriceV +=(target.parentNode.parentNode.children[4].children[0].value)*target.parentNode.parentNode.children[3].innerHTML;
+					}
+					if(target.checked == false){
+						that.totalNumV -=  parseInt(target.parentNode.parentNode.children[4].children[0].value);
+						that.totalPriceV -= (target.parentNode.parentNode.children[4].children[0].value) * target.parentNode.parentNode.children[3].innerHTML;
+						that.selectAll.checked == false;
+					}
+					that.totalNum.innerHTML = "总数量为：" + that.totalNumV;
+					that.totalPrice.innerHTML = that.totalPriceV;
+				}
+			})
+			this.selectAll.addEventListener("change",function(eve){
+				that.totalNumV = 0;
+				that.totalPriceV = 0;
+				that.tr = document.querySelectorAll("tbody tr");
+				if(this.checked == true){
+
+					for(var i = 0;i<that.tr.length;i++){
+						that.tr[i].children[0].children[0].checked = true;
+						that.totalNumV += parseInt(that.tr[i].children[4].children[0].value);
+						that.totalPriceV += parseInt(that.tr[i].children[4].children[0].value)*that.tr[i].children[3].innerHTML;
+					}
+					
+				}else{
+					console.log(this.checked)
+					for(var i = 0;i<that.tr.length;i++){
+						that.tr[i].children[0].children[0].checked = false;
+						that.totalNumV = 0;
+						that.totalPriceV = 0;
+					}
+				}
+				that.totalNum.innerHTML = "总数量为：" + that.totalNumV;
+				that.totalPrice.innerHTML = that.totalPriceV;
+			})
 		}
 
 }
